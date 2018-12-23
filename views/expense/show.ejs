@@ -1,0 +1,20 @@
+<% include ../partials/header.ejs %>
+
+<h2>Category 
+<%= expenseList[0].number                       %>: 
+<%= expenseList[0].month[0].toUpperCase()+expenseList[0].month.substr(1) %>, <%= expenseList[0].year %>
+</h2>
+
+<% var total = 0                                 %>
+
+<% expenseList.forEach(function(expense){      %>
+    <li>
+<%= expense.name %>: &#8362 <%= expense.amount %>
+    </li>
+<%  total += Number(expense.amount)             %>    
+<% })                                            %>
+
+Total: &#8362 <%= total %>
+
+
+<% include ../partials/footer.ejs %>

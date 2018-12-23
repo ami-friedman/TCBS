@@ -1,0 +1,12 @@
+<% include ../partials/header.ejs %>
+<ul>
+    <% expenseList.forEach( item => { %>
+        <li>
+            <a href="/expense/<%= item.category %>/<%= item.month %>/<%= item.year %>">
+                Category <%= item.category %>: <%= item.month[0].toUpperCase()+item.month.substr(1) %>, <%= item.year %>
+            </a>
+        </li>
+
+    <% })  %>
+</ul>
+<% include ../partials/footer.ejs %>
