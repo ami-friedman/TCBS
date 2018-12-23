@@ -6,3 +6,7 @@ DB: MongoDB
 FE: HTML, CSS, JS, jQuery, EJS, Bootstrap
 BE: Node, Express
 
+# Screens
+* Create a balance sheet
+
+
