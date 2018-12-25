@@ -106,7 +106,19 @@ let validYears = [
     "2018", "2019"
 ]
 
+function validateExpenseInput(req, res, next){
+    if (isExpenseInputValid(req.params.num, req.params.month, req.params.year)){
+        next();
+    }
+    else {
+        res.redirect("/expense");
+    }
 
+}
+
+app.get("/", (req, res) => {
+    res.redirect("expense");
+})
 
 //Routes
 //Category - INDEX: GET: Show all the expenses for this user
@@ -116,11 +128,8 @@ app.get("/expense", (req, res) => {
 
 
 //Category - SHOW: GET: Show info about expenses of category X for a given month
-app.get("/expense/:num/:month/:year", (req, res) => {
-    if (!validCategories.includes(req.params.num) || !validMonths.includes(req.params.month.toLowerCase()) || !validYears.includes(req.params.year)){
-        return res.redirect("/expense");
-    }
-
+app.get("/expense/:num/:month/:year", validateExpenseInput, (req, res) => {
+   
     //TEMP CODE
     let expenseList = getExpensesByCategoryAndMonth(req.params.num, req.params.month.toLowerCase(), req.params.year);
     //END TEMP CODE
@@ -167,6 +176,13 @@ function mapExpensesToTuples(listOfExpenses){
 function getExpensesByCategoryAndMonth(number, month, year){
     let listOfExpenses = groupExpensesByCategoryAndMonth();
     return listOfExpenses[number +'#' + month + '#' + year];
+}
+
+function isExpenseInputValid(category, month, year){
+    if (!validCategories.includes(category) || !validMonths.includes(month.toLowerCase()) || !validYears.includes(year)){
+        return false;
+    }
+    return true;
 }
 
     
