@@ -2,8 +2,8 @@
 <ul>
     <% expenseList.forEach( item => { %>
         <li>
-            <a href="/expense/<%= item.category %>/<%= item.month %>/<%= item.year %>">
-                Category <%= item.category %>: <%= item.month[0].toUpperCase()+item.month.substr(1) %>, <%= item.year %>
+            <a href="/expense/<%= item.month %>/<%= item.year %>">
+                <%= item.month[0].toUpperCase()+item.month.substr(1) %>, <%= item.year %>
             </a>
         </li>
 

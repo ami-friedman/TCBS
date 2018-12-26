@@ -1,52 +1,22 @@
 <% include ../partials/header.ejs %>
 
-<form action="/category" method="POST">
+<form action="/expense" method="POST">
     <select name="category">
-        <option selected value="category1">Category 1</option>
-        <option value="category2">Category 2</option>
-        <option value="category3">Category 3</option>
+        <option selected value="1">Category 1</option>
+        <option value="2">Category 2</option>
+        <option value="3">Category 3</option>
+    </select><br>
+    <select name="month">
+        <option selected value="jan">Jan</option>
     </select>
-    <input type="text" name="expense[0][name]" placeholder="Expense Name">
-    <input type="number" name="expense[0][number]" placeholder="Expense Amount">
-    <input type="text" name="expense[1][name]" placeholder="Expense Name">
-    <input type="number" name="expense[1][number]" placeholder="Expense Amount">
+    <select name="year">
+        <option selected value="2019">2019</option>
+    </select><br>
+    <input type="text" name="name" placeholder="Expense Name">
+    <input type="number" name="amount" placeholder="Expense Amount">
+    <br>
     <button type="submit">Submit</button>
 </form>
-
-<!-- <div class="container">
-    <h2>Category Form</h2>
-    <form action="/category" method="POST">
-    <select>
-        <option selected value="category1">Category 1</option>
-        <option value="category2">Category 2</option>
-        <option value="category3">Category 3</option>
-    </select>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Expense Name</th>
-                <th scope="col">Expense Amount</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>
-                    <input type="text" name="expense[0].name" style="border: 0;">
-                </td>
-                <td>
-                    <input type="number" name="expense[0].amount" style="border: 0;">
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <button type="submit">Submit</button>
-    </form>
-</div> -->
-
-
 
 
 <% include ../partials/footer.ejs %>
