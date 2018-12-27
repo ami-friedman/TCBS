@@ -4,7 +4,7 @@
 <%= month[0].toUpperCase()+month.substr(1) %>, <%= year %>:
 </h2>
 
-<% for (var category in expenseList){ %>
+<% for (let category in expenseList){ %>
 Category <%= category %>:
 <ul>
         <%    expenseList[category].forEach( exp => { %>
@@ -14,5 +14,7 @@ Category <%= category %>:
         <%    }); %>
 </ul>
 <% } %>
+
+Total: <%= total %>
 
 <% include ../partials/footer.ejs %>

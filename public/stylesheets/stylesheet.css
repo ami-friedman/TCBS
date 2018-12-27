@@ -1,0 +1,8 @@
+.addRowIcon {
+    font-size: 2.0em;
+    cursor: pointer;
+}
+
+.category-list-ul li {
+    list-style: none;
+}

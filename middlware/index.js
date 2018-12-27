@@ -1,8 +1,10 @@
+const helpers = require("../helpers");
+
 let middlwareObj = {};
 
 //Middleware
-middlwareObj.validateMonthInput =  function (req, res, next){
-    if (isMonthInputValid(req.params.month, req.params.year)){
+middlwareObj.validateMonthInput =  (req, res, next) => {
+    if (helpers.isMonthInputValid(req.params.month, req.params.year)){
         next();
     }
     else {
@@ -10,8 +12,8 @@ middlwareObj.validateMonthInput =  function (req, res, next){
     }
 }
 
-middlwareObj.validateExpenseInput =  function (req, res, next){
-    if (isExpenseInputValid(req.body)){
+middlwareObj.validateExpenseInput =  (req, res, next) => {
+    if (helpers.isExpenseInputValid(req.body)){
         next();
     }
     else {
@@ -19,33 +21,13 @@ middlwareObj.validateExpenseInput =  function (req, res, next){
     }
 }
 
-
-//UTILS
-let validMonths = [
-    "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"
-]
-
-let validCategories = [
-    "1", "2", "3"
-]
-
-let validYears = [
-    "2018", "2019"
-]
-
-
-function isMonthInputValid(month, year){
-    if (!validMonths.includes(month.toLowerCase()) || !validYears.includes(year)){
-        return false;
+middlwareObj.validateLoggedIn = (req, res, next) => {
+    if (!req.session._id){
+        res.redirect("/login");
     }
-    return true;
-}
-
-function isExpenseInputValid(expense){
-    if (!validMonths.includes(expense.month.toLowerCase()) || !validYears.includes(expense.year) || !validCategories.includes(expense.category)){
-        return false;
+    else {
+        next();
     }
-    return true;
 }
 
 module.exports = middlwareObj;

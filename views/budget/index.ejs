@@ -1,0 +1,14 @@
+<% include ../partials/header.ejs %>
+
+<% for (let category = 1; category <= 3;category++) { %>
+    Category <%= category %>:
+    <ul>
+            <%    budget[category].forEach( item  => { %>
+                <li>
+                    <%= item.name %>: &#8362 <%= item.amount %>
+                </li>
+            <%    }); %>
+    </ul>
+<% } %>
+
+<% include ../partials/footer.ejs %>

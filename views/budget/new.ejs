@@ -1,0 +1,22 @@
+<% include ../partials/header.ejs %>
+
+<form action="/budget/new" method="POST">
+    <% categories.forEach( category => { %>
+    <ul class="category-list-ul" id="<%= category %>">
+        <li>
+            <label value="<%= category %>">Category
+                <%= category %>
+            </label>
+            <br>
+            <input type="text" name="<%= category %>[0][name]" placeholder="Expense Name">
+            <input type="number" name="<%= category %>[0][amount]" placeholder="Expense Amount">
+            <span class="addRowIcon">+</span>
+            <br>
+        </li>
+    </ul>
+    <% }) %>
+    <button type="submit">Submit</button>
+</form>
+
+
+<% include ../partials/footer.ejs %>
