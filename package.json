@@ -19,6 +19,9 @@
   "bugs": {
     "url": "https://github.com/amishosh/TCBS/issues"
   },
+  "engines": {
+    "node": "8.x"
+  },
   "homepage": "https://github.com/amishosh/TCBS#readme",
   "dependencies": {
     "ejs": "^2.6.1",
