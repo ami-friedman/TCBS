@@ -39,7 +39,7 @@ app.use("/budget", budgetRouter);
 app.use("/expense", expenseRouter);
 
 console.log("Connection to the DB");
-mongoose.connect("mongodb://tcbs-admin:@MiFr1dman@ds145184.mlab.com:45184/heroku_bff2dlfz",{ useNewUrlParser: true });
+mongoose.connect("mongodb://admin:asfjul09il@ds145184.mlab.com:45184/heroku_bff2dlfz",{ useNewUrlParser: true });
 
 
 console.log("passport init");
