@@ -30,6 +30,7 @@ app.use((req, res, next) => {
     res.locals.months = helpers.getCapitalizeMonths();
     res.locals.categories = helpers.getCategories();
     res.locals.years = helpers.getYears();
+    res.locals.userId = req.session._id;
     next();
 });
     

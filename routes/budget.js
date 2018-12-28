@@ -14,14 +14,7 @@ router.get("/", middlware.validateLoggedIn,(req, res) => {
         if (err){
             console.log(err);
             res.redirect("/budget")
-        } else {
-            console.log(foundUser.baselineBudget);
-            for (let category = 1; category <= 3;category++){
-                console.log(foundUser.baselineBudget[category])
-
-            }
-
-                
+        } else {        
             return res.render("budget/index", {budget: foundUser.baselineBudget});
         }
 

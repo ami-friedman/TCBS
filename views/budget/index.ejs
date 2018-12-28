@@ -1,14 +1,48 @@
 <% include ../partials/header.ejs %>
 
-<% for (let category = 1; category <= 3;category++) { %>
-    Category <%= category %>:
-    <ul>
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a data-toggle="tab" class="nav-link tab" id="tab" href="#">Category 1</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link tab" href="#">Category 2</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link tab" href="#">Category 3</a>
+    </li>
+</ul>
+
+<div class="container">
+    <% for (let category = 1; category <= 3;category++) { %>
+    Category
+    <%= category %>:
+    <table class="table table-bordered">
+        <tr>
+            <th scope="col">Expense Name</th>
+            <th scope="col">Expense Amount</th>
+        </tr>
+        <tbody>
             <%    budget[category].forEach( item  => { %>
-                <li>
-                    <%= item.name %>: &#8362 <%= item.amount %>
-                </li>
+            <td>
+                <%= item.name %>
+            </td>
+            <td>
+                &#8362
+                <%= item.amount %>
+            </td>
             <%    }); %>
-    </ul>
-<% } %>
+
+        </tbody>
+    </table>
+    <% } %>
+
+</div>
+
+
+
+
+<a href="/budget/new">
+    <li>New Budget</li>
+</a>
 
 <% include ../partials/footer.ejs %>

@@ -12,26 +12,35 @@
 </head>
 
 <body>
-        <ul>
-                <li>
-                        <a href="/">Home</a>
-                </li>
-                <li>
-                        <a href="/expense">Show all expenses</a>
-                </li>
-                <li>
-                        <a href="/expense/new">Add a new expense</a>
-                </li>
-                <li>
-                        <a href="/budget">Budget</a>
-                </li>
-                <li>
-                        <a href="/register">Register</a>
-                </li>
-                <li>
-                        <a href="/login">Login</a>
-                </li>
-                <li>
-                        <a href="/logout">Logout</a>
-                </li>
-        </ul>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="#">$ TCBS $</a>
+                <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                                <a class="nav-link" href="/">Home</a>
+                        </li>
+                </ul>
+                <ul class="nav justify-content-end">
+                        <% if (userId) {%>
+                        <li class="nav-item">
+                                <a class="nav-link" href="/expense">Expenses</a>
+                        </li>
+                        <li class="nav-item">
+                                <a class="nav-link" href="/expense/new">Add a new expense</a>
+                        </li>
+                        <li class="nav-item">
+                                <a class="nav-link" href="/budget">Budget</a>
+                        </li>
+                        <li class="nav-item">
+                                <a class="nav-link" href="/logout">Logout</a>
+                        </li>
+                        <% } else { %>
+                        <li class="nav-item">
+                                <a class="nav-link" href="/register">Register</a>
+                        </li>
+                        <li class="nav-item">
+                                <a class="nav-link" href="/login">Login</a>
+                        </li>
+                        <% } %>
+
+                </ul>
+        </nav>
