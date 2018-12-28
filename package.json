@@ -20,7 +20,7 @@
     "url": "https://github.com/amishosh/TCBS/issues"
   },
   "engines": {
-    "node": "8.x"
+    "node": "8.14.1"
   },
   "homepage": "https://github.com/amishosh/TCBS#readme",
   "dependencies": {
