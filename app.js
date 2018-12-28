@@ -8,13 +8,12 @@ const express        = require("express"),
       indexRouter    = require("./routes/index"),
       mongoose       = require("mongoose"),
       bodyParser     = require("body-parser"),
-      passport       = require("passport"),
-      localStrategy  = require("passport-local"),
       User           = require("./models/User"),
       helpers        = require("./helpers"),
       expressSession = require("express-session");
 
 const app = express();
+require('dotenv').load();
 
 
 
@@ -39,16 +38,8 @@ app.use("/budget", budgetRouter);
 app.use("/expense", expenseRouter);
 
 console.log("Connection to the DB");
-mongoose.connect("mongodb://admin:asfjul09il@ds145184.mlab.com:45184/heroku_bff2dlfz",{ useNewUrlParser: true });
-
-
-console.log("passport init");
-app.use(passport.initialize());
-app.use(passport.session());
-
-passport.use(new localStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+//mongoose.connect("mongodb://admin:asfjul09il@ds145184.mlab.com:45184/heroku_bff2dlfz",{ useNewUrlParser: true });
+mongoose.connect(`mongodb://${process.env.LOCAL_DB}`,{ useNewUrlParser: true });
 
 
 let port = process.env.PORT;

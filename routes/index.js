@@ -13,11 +13,12 @@ router.get("/register", (req, res) => {
 })
 
 router.post("/register", (req, res) => {
-    //Verify passwords match: Move to MW!!
+    //TODO: Verify passwords match: Move to MW!!
 
     //Normelize the user object to match the schema in User.js
     delete req.body.user.passwordConfirm
     //Insert into DB and redirect
+    console.log(req.body.user);
     User.create(req.body.user, (err, createdUser) => {
         if (err) {
             //Generate message to the user (use flash message??) and redirect back

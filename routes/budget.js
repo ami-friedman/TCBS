@@ -13,7 +13,7 @@ router.get("/", middlware.validateLoggedIn,(req, res) => {
     User.findById(req.session._id).populate("baselineBudget").exec((err, foundUser) => {
         if (err){
             console.log(err);
-            res.redirect("/budget")
+            res.redirect("/expense")
         } else {        
             return res.render("budget/index", {budget: foundUser.baselineBudget});
         }

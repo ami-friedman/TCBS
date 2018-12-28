@@ -13,6 +13,7 @@
 </ul>
 
 <div class="container">
+    <% if (budget) {%>
     <% for (let category = 1; category <= 3;category++) { %>
     Category
     <%= category %>:
@@ -34,15 +35,10 @@
 
         </tbody>
     </table>
+    <% } } else {%>
+    Setup a new budget here: 
+    <a href="/budget/new">New Budget</a>
     <% } %>
-
 </div>
-
-
-
-
-<a href="/budget/new">
-    <li>New Budget</li>
-</a>
 
 <% include ../partials/footer.ejs %>
