@@ -18,8 +18,8 @@ const app = express();
 
 
 
+console.log("Configuring the application");
 
-//app configuration 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
@@ -38,11 +38,11 @@ app.use("/", indexRouter);
 app.use("/budget", budgetRouter);
 app.use("/expense", expenseRouter);
 
-
+console.log("Connection to the DB");
 mongoose.connect("mongodb://localhost/tcbs-db",{ useNewUrlParser: true });
 
 
-
+console.log("passport init");
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -56,6 +56,7 @@ if (port == null || port == "") {
   port = 3000;
 }
 
+console.log("Starting server");
 app.listen(port, () => {
     console.log("Server started....");
 });
