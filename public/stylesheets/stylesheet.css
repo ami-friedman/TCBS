@@ -1,4 +1,4 @@
-.addRowIcon {
+.add-row-icon {
     font-size: 2.0em;
     cursor: pointer;
 }
@@ -7,7 +7,20 @@
     list-style: none;
 }
 
-.container {
+.new-budget-container {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.add-remove-button {
+    text-align: left;
+}
+
+.category-container {
     max-width: 500px; 
     margin-top: 50px;
+}
+
+.category-label {
+    text-align: left;
 }

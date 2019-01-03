@@ -1,44 +1,53 @@
 <% include ../partials/header.ejs %>
 
-<ul class="nav nav-tabs">
+<% if (budget) {%>
+<ul class="nav nav-tabs justify-content-end" id="budget-tab" role="tablist">
+    <% for (let category = 1; category <= 3;category++) { %>
     <li class="nav-item">
-        <a data-toggle="tab" class="nav-link tab" id="tab" href="#">Category 1</a>
+        <a class="nav-link <% if (category === 1) {%> active <% } %>" id="category-<%= category %>-tab" data-toggle="tab" href="#category-<%= category %>" role="tab" aria-controls="category-<%= category %>"
+            aria-selected="true">Category <%= category %></a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link tab" href="#">Category 2</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link tab" href="#">Category 3</a>
-    </li>
+    <% } %>
 </ul>
 
-<div class="container">
-    <% if (budget) {%>
+<div class="tab-content" id="budget-tab-content">
     <% for (let category = 1; category <= 3;category++) { %>
-    Category
-    <%= category %>:
-    <table class="table table-bordered">
-        <tr>
-            <th scope="col">Expense Name</th>
-            <th scope="col">Expense Amount</th>
-        </tr>
-        <tbody>
-            <%    budget[category].forEach( item  => { %>
-            <td>
-                <%= item.name %>
-            </td>
-            <td>
-                &#8362
-                <%= item.amount %>
-            </td>
-            <%    }); %>
+    <div class="tab-pane fade <% if (category === 1) {%>show active <% } %>" id="category-<%= category %>" role="tabpanel" aria-labelledby="category-<%= category %>-tab">
+        <% if (budget[category].month) { %>
+            <h2> Budget for <%= budget[category].month %>, <%= budget[category].year %> </h2>
+            <% } else {%>
+            <h2>Baseline Budget</h2>
+        <% } %>
+        <div class="container category-container">
+          
+            <table class="table table-bordered">
+                <tr>
+                    <th scope="col">Expense Name</th>
+                    <th scope="col">Expense Amount</th>
+                </tr>
+                <tbody>
+                    <%    budget[category].forEach( item  => { %>
+                 <tr>
+                    <td>
+                        <%= item.name %>
+                    </td>
+                    <td>
+                        &#8362
+                        <%= item.amount %>
+                    </td>
+                </tr>
+                    <%    }); %>
 
-        </tbody>
-    </table>
-    <% } } else {%>
-    Setup a new budget here: 
-    <a href="/budget/new">New Budget</a>
+                </tbody>
+            </table>
+        </div>
+    </div>
     <% } %>
 </div>
+<% } else {%>
+<div class="container new-budget-container">
+    <a href="/budget/new"><button type="button" class="btn btn-info btn-lg">New Baseline Budget</button></a>
+</div>
+<% } %>
 
 <% include ../partials/footer.ejs %>
