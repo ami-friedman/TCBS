@@ -18,7 +18,6 @@ router.post("/register", (req, res) => {
     //Normelize the user object to match the schema in User.js
     delete req.body.user.passwordConfirm
     //Insert into DB and redirect
-    console.log(req.body.user);
     User.create(req.body.user, (err, createdUser) => {
         if (err) {
             //Generate message to the user (use flash message??) and redirect back
@@ -28,7 +27,7 @@ router.post("/register", (req, res) => {
         }
         else {
             req.session._id = createdUser._id;
-            return res.redirect("/");
+            return res.redirect("/budget");
         }
     })
 })
@@ -49,7 +48,7 @@ router.post("/login", (req, res) => {
             }
         }
         req.session._id = foundUser._id;
-        res.redirect("/expense");
+        res.redirect("/budget");
     });
 });
 
