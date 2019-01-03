@@ -1,4 +1,6 @@
-//Global variables holding the number of rows in the budget form
+/** Saves the index state of the row number for each category (new budget form) 
+ * The static page loads with index === 0 and therefore starting index at 1
+*/
 let index1 = 1;
 let index2 = 1;
 let index3 = 1;

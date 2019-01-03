@@ -1,7 +1,7 @@
 <% include ../partials/header.ejs %>
 
 <div class="container new-budget-container">
-    <form action="/budget/new/<=% month %>/<=% year %>" method="POST">
+    <form action="/budget/new/<%= month %>/<%= year %>" method="POST">
         <% categories.forEach( category => { %>
         <div class="form-group category-label">
             <h2>
@@ -11,14 +11,13 @@
             </h2>
         </div>
         <ul id="ul-category-<%= category %>">
-            <% let index = 0 %>
             <li style="list-style: none;">
                 <div class="form-row">
                     <div class="col from-group">
-                        <input type="text" class="form-control" name="<%= category %>[<%= index %>][name]" placeholder="Expense Name">
+                        <input type="text" class="form-control" name="<%= category %>[0][name]" placeholder="Expense Name">
                     </div>
                     <div class="col from-group">
-                        <input type="number" class="form-control" name="<%= category %>[<%= index++ %>][amount]" placeholder="Expense Amount">
+                        <input type="number" class="form-control" name="<%= category %>[0][amount]" placeholder="Expense Amount">
                     </div>
                     <div class="col form-group add-remove-button">
                         <button type="button" class="btn btn-success edit-button">+</button>
