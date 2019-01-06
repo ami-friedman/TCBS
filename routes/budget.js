@@ -10,9 +10,14 @@ router = express.Router({ mergeParams: true });
 //Baeline Budget - INDEX: GET: Show the budget for this user
 router.get("/", middlware.validateLoggedIn, async (req, res) => {
     //find baseline budget for this user and return
-    let foundUser = await User.findById(req.session._id).populate("baselineBudget");
-    //error handling if user not found or budget is more generically handledd in index.ejs
-    res.render("budget/index", { budget: foundUser.baselineBudget });
+    try {
+        let foundUser = await User.findById(req.session._id).populate("baselineBudget");
+        //error handling if user not found or budget is more generically handledd in index.ejs
+        res.render("budget/index", { budget: foundUser.baselineBudget });
+    } catch(error) {
+        console.log(error);
+        res.redirect("/budegt");
+    }
 })
 
 
@@ -24,14 +29,19 @@ router.get("/new", middlware.validateLoggedIn, (req, res) => {
 
 // Budget - NEW: POST: Handle the form action for a new baseline
 router.post("/new", middlware.validateLoggedIn, async (req, res) => {
-    let foundUser = await User.findById(req.session._id);
-    if (foundUser) {
-        let newBudget = await Budget.create(req.body);
-        if (newBudget) {
-            foundUser.baselineBudget = newBudget._id;
-            foundUser.save();
+    try {
+        let foundUser = await User.findById(req.session._id);
+        if (foundUser) {
+            let newBudget = await Budget.create(req.body);
+            if (newBudget) {
+                foundUser.baselineBudget = newBudget._id;
+                foundUser.save();
+            }
+            res.redirect("/budget");
         }
-        res.redirect("/budget");
+    } catch(error) {
+        console.log(error);
+        res.redirect("/budegt");
     }
 });
 
@@ -41,21 +51,25 @@ router.get("/new/:month/:year", middlware.validateLoggedIn, (req, res) => {
 });
 
 // Budget - NEW: POST: Handle the form action for a new monthly
-router.post("/new/:month/:year", middlware.validateLoggedIn, (req, res) => {
-    res.send(req.body);
-
+router.post("/new/:month/:year", middlware.validateLoggedIn, async (req, res) => {
+    try {
+        let foundUser = await User.findById(req.session._id);
+        if (foundUser) {
+            let newBudget = await Budget.create(req.body);
+            if (newBudget) {
+                foundUser.monthlyBudgets.push(newBudget._id);
+                foundUser.save();
+            }
+            res.redirect("/budget");
+        }
+    } catch(error) {
+        console.log(error);
+        res.redirect("/budegt");
+    }
 });
-
 
 //Budget - UPDATE: PUT: Handle the update action for a budget
 
-
-
-
-//Monthly Budget - NEW: GET: Show the form for adding a new budget
-router.get("/new", middlware.validateLoggedIn, (req, res) => {
-    res.render("budget/new");
-});
 
 
 module.exports = router;
