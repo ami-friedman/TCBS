@@ -18,11 +18,17 @@ router.post("/register", async (req, res) => {
     //Normelize the user object to match the schema in User.js
     delete req.body.user.passwordConfirm
     //Insert into DB and redirect
-    createdUser = await User.create(req.body.user);
-    if (createdUser){
-        req.session._id = createdUser._id;
-        return res.redirect("/budget");
+    try {
+        let createdUser = await User.create(req.body.user);
+        if (createdUser) {
+            req.session._id = createdUser._id;
+            res.redirect("/budget");
+        }
+    } catch (error){
+        console.log(error);
+        return res.redirect("/register");
     }
+    
 });
 
 router.get("/login", (req, res) => {
@@ -30,12 +36,23 @@ router.get("/login", (req, res) => {
 })
 
 router.post("/login", async (req, res) => {
-    let foundUser = await User.findOne({ email: req.body.user.email });
-    if (foundUser && foundUser.password !== req.body.user.password){
-        return res.redirect("/login");
+    try {
+        let foundUser = await User.findOne({ email: req.body.user.email });
+        if (foundUser && foundUser.password === req.body.user.password) {
+            req.session._id = foundUser._id;
+            res.redirect("/budget");
+        } else if (foundUser && foundUser.password !== req.body.user.password) {
+            console.log("wrong password");
+            res.redirect("/login");
+        } else {
+            res.redirect("/login");
+        }
+
+    } catch (error) {
+        console.log(error);
+        res.redirect("/login");
     }
-    req.session._id = foundUser._id;
-    res.redirect("/budget");
+
 });
 
 router.get("/logout", (req, res) => {

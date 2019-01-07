@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+
 const budgetSchema = new mongoose.Schema({
     "1": [
         {
@@ -20,7 +21,12 @@ const budgetSchema = new mongoose.Schema({
         }
     ],
     month: String,
-    year: String
+    year: String,
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        unique: true
+    }
 })
 
 module.exports = mongoose.model("Budget", budgetSchema);

@@ -57,8 +57,10 @@ router.post("/new/:month/:year", middlware.validateLoggedIn, async (req, res) =>
         if (foundUser) {
             let newBudget = await Budget.create(req.body);
             if (newBudget) {
-                foundUser.monthlyBudgets.push(newBudget._id);
-                foundUser.save();
+                newBudget.month = req.params.month;
+                newBudget.year = req.params.year;
+                newBudget.userId = foundUser._id;
+                newBudget.save();
             }
             res.redirect("/budget");
         }

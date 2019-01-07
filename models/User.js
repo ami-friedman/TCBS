@@ -17,13 +17,7 @@ const userSchema = new mongoose.Schema({
     baselineBudget: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Budget"
-    },
-    monthlyBudgets: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Budget"
-        }
-    ]
+    }
 })
 
 module.exports = mongoose.model("User", userSchema);
