@@ -13,8 +13,8 @@
 <div class="tab-content" id="budget-tab-content">
     <% for (let category = 1; category <= 3;category++) { %>
     <div class="tab-pane fade <% if (category === 1) {%>show active <% } %>" id="category-<%= category %>" role="tabpanel" aria-labelledby="category-<%= category %>-tab">
-        <% if (budget[category].month) { %>
-            <h2> Budget for <%= budget[category].month %>, <%= budget[category].year %> </h2>
+        <% if (budget.month) { %>
+            <h2> Budget for <%= budget.month %>, <%= budget.year %> </h2>
             <% } else {%>
             <h2>Baseline Budget</h2>
         <% } %>

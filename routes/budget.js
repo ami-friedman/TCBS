@@ -7,7 +7,7 @@ const express = require("express"),
     helpers = require("../helpers");
 router = express.Router({ mergeParams: true });
 
-//Baeline Budget - INDEX: GET: Show the budget for this user
+//Baeline Budget - INDEX: GET: Show the baseline budget for this user
 router.get("/", middlware.validateLoggedIn, async (req, res) => {
     //find baseline budget for this user and return
     try {
@@ -19,6 +19,24 @@ router.get("/", middlware.validateLoggedIn, async (req, res) => {
         res.redirect("/budegt");
     }
 })
+
+//Baeline Budget - INDEX: GET: Show the monthly budget for this user
+router.get("/:month/:year", middlware.validateLoggedIn, async (req, res) => {
+    try {
+        //find the budget with this month and year linked to this user 
+        let foundBudget = await Budget.findOne({month: req.params.month, year: req.params.year, userId: req.session._id});
+        if (foundBudget){
+            foundBudget.month = helpers.capitlizeMonth(foundBudget.month);
+            res.render("budget/index", { budget: foundBudget });
+        } else {
+            res.redirect("/budegt");
+        }
+    } catch(error) {
+        console.log(error);
+        res.redirect("/budegt");
+    }
+})
+
 
 
 //Baseline Budget - NEW: GET: Show the form for adding a new baseline budget

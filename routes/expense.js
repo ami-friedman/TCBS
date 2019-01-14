@@ -1,5 +1,3 @@
-
-
 /* Route configuration */
 const express    = require("express"),
       middlware  = require("../middlware"),  

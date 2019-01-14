@@ -19,18 +19,27 @@ const helpers = {};
 /**
  * Given a list of strings, this method will return the same list where every first letter of every string is capital
  */
-helpers.getCapitalizeMonths = () => {
+function getCapitalizeMonths() {
     let newMonths = validMonths;
     for (let i = 0;i < newMonths.length;i++){
-        newMonths[i] = newMonths[i][0].toUpperCase() + newMonths[i].substr(1)
+        newMonths[i] = capitlizeMonth(newMonths[i]);
     }
     return newMonths;
 }
 
-helpers.getCategories = () => validCategories;
-helpers.getYears = () => validYears;
+function capitlizeMonth (month) {
+    return (month[0].toUpperCase() + month.substr(1));
+}
 
-helpers.filterExpensesByMonth = (expenses, month, year) => {
+function getCategories(){
+  return   validCategories
+}
+
+function getYears() {
+    return validYears;
+}
+
+function filterExpensesByMonth(expenses, month, year){
     return expenses.filter(expense => {
         if (expense.month === month && expense.year === year){
             return expense;
@@ -38,19 +47,19 @@ helpers.filterExpensesByMonth = (expenses, month, year) => {
     });
 }
 
-helpers.groupExpensesByCategory = groupedList => {
+function groupExpensesByCategory(groupedList) {
     return (__.groupBy(groupedList, value => {
         return value.category;
     }));
 }
 
-helpers.groupExpensesByMonth = expenses => {
+function groupExpensesByMonth(expenses) {
     return (__.groupBy(expenses, value => {
         return value.month + '#' + value.year;
     }));
 }
 
-helpers.mapExpensesToMonth = listOfExpenses => {
+function mapExpensesToMonth(listOfExpenses) {
     return (__.map(listOfExpenses, group => {
         return {
             month: group[0].month, 
@@ -58,18 +67,29 @@ helpers.mapExpensesToMonth = listOfExpenses => {
         }}));
 }
 
-helpers.isMonthInputValid = (month, year) => {
+function isMonthInputValid(month, year) {
     if (!validMonths.includes(month.toLowerCase()) || !validYears.includes(year)){
         return false;
     }
     return true;
 }
 
-helpers.isExpenseInputValid = expense => {
+function isExpenseInputValid(expense) {
     if (!validMonths.includes(expense.month.toLowerCase()) || !validYears.includes(expense.year) || !validCategories.includes(expense.category)){
         return false;
     }
     return true;
 }
 
-module.exports = helpers;
+module.exports = {
+    getCapitalizeMonths,
+    capitlizeMonth,
+    getCategories,
+    getYears,
+    filterExpensesByMonth,
+    groupExpensesByCategory,
+    groupExpensesByMonth,
+    mapExpensesToMonth,
+    isMonthInputValid,
+    isExpenseInputValid
+};
