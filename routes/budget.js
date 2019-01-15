@@ -1,14 +1,14 @@
 /* Route configuration */
-const express = require("express"),
-    middlware = require("../middlware"),
-    Budget = require("../models/Budget"),
-    Expense = require("../models/Expense"),
-    User = require("../models/User"),
-    helpers = require("../helpers");
-router = express.Router({ mergeParams: true });
+import express from 'express'
+import middleware from '../middleware'
+import Budget from '../models/Budget'
+import User from '../models/User'
+import helpers from '../helpers'
+
+const router = express.Router({ mergeParams: true });
 
 //Baeline Budget - INDEX: GET: Show the baseline budget for this user
-router.get("/", middlware.validateLoggedIn, async (req, res) => {
+router.get("/", middleware.validateLoggedIn, async (req, res) => {
     //find baseline budget for this user and return
     try {
         let foundUser = await User.findById(req.session._id).populate("baselineBudget");
@@ -21,7 +21,7 @@ router.get("/", middlware.validateLoggedIn, async (req, res) => {
 })
 
 //Baeline Budget - INDEX: GET: Show the monthly budget for this user
-router.get("/:month/:year", middlware.validateLoggedIn, async (req, res) => {
+router.get("/:month/:year", middleware.validateLoggedIn, async (req, res) => {
     try {
         //find the budget with this month and year linked to this user 
         let foundBudget = await Budget.findOne({month: req.params.month, year: req.params.year, userId: req.session._id});
@@ -40,13 +40,13 @@ router.get("/:month/:year", middlware.validateLoggedIn, async (req, res) => {
 
 
 //Baseline Budget - NEW: GET: Show the form for adding a new baseline budget
-router.get("/new", middlware.validateLoggedIn, (req, res) => {
+router.get("/new", middleware.validateLoggedIn, (req, res) => {
     res.render("budget/new");
 });
 
 
 // Budget - NEW: POST: Handle the form action for a new baseline
-router.post("/new", middlware.validateLoggedIn, async (req, res) => {
+router.post("/new", middleware.validateLoggedIn, async (req, res) => {
     try {
         let foundUser = await User.findById(req.session._id);
         if (foundUser) {
@@ -64,12 +64,12 @@ router.post("/new", middlware.validateLoggedIn, async (req, res) => {
 });
 
 //Baseline Budget - NEW: GET: Show the form for adding a new monthly budget
-router.get("/new/:month/:year", middlware.validateLoggedIn, (req, res) => {
+router.get("/new/:month/:year", middleware.validateLoggedIn, (req, res) => {
     res.render("budget/newMonthly", { month: req.params.month, year: req.params.year });
 });
 
 // Budget - NEW: POST: Handle the form action for a new monthly
-router.post("/new/:month/:year", middlware.validateLoggedIn, async (req, res) => {
+router.post("/new/:month/:year", middleware.validateLoggedIn, async (req, res) => {
     try {
         let foundUser = await User.findById(req.session._id);
         if (foundUser) {

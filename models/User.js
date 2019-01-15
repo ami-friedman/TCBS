@@ -1,23 +1,73 @@
-const mongoose = require("mongoose");
+import UserModel from './__mocks__/UserModel'
 
-const userSchema = new mongoose.Schema({
-    name:{
-        first: String,
-        last: String
-    },
-    email: {type: String, unique: true},
-    password: String,
-    expenses: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Expense"
-        }
-    ],
-    //Identified by month and year being null!
-    baselineBudget: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Budget"
+
+module.exports = class User {
+    constructor(params) {
+        this._init();
     }
-})
 
-module.exports = mongoose.model("User", userSchema);
+    /** Create a new user in DB
+     * @param userParams name {first, last}, email, password 
+     */
+    async create(userParams){
+        await this._create(userParams);
+    }
+
+    async findByEmail(userParams){
+        let foundUser = await this._findByEmail(userParams); 
+        return this._user;
+    }
+
+    getId(){
+        return this._user._id;
+    }
+
+    async _create(params){
+        try {
+            let createdUser = await UserModel.create(params);
+            if (createdUser) {
+                this._populateProps(createdUser);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async _findByEmail(email){
+        try {
+            let foundUser = await UserModel.findOne({email: email});
+            this._populateProps(foundUser);
+        } catch(error){
+            console.log(error);
+        }
+    }
+
+    async _findById(id){
+        try {
+            let foundUser = await UserModel.findById(id);
+            this._populateProps(foundUser);
+        } catch(error){
+            console.log(error);
+        }
+    }
+
+    _init(){
+        this._user = {
+            name: {
+                first: null,
+                last: null
+            }
+        };
+        this._user._id = null;
+        this._user.email = null;
+        this._user.password = null;
+    }
+
+    _populateProps(props){
+        this._user._id = props._id;
+        this._user.firstName = props.name.first;
+        this._user.lastName = props.name.last;
+        this._user.email = props.email;
+        this._user.password = props.password;
+    }
+}

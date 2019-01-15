@@ -1,15 +1,16 @@
 /* Route configuration */
-const express    = require("express"),
-      middlware  = require("../middlware"),  
-      Expense    = require("../models/Expense"),
-      User       = require("../models/User"),
-      helpers    = require("../helpers");
-      router     = express.Router({ mergeParams: true });
+import express from 'express'
+import middleware from '../middleware'
+import Expense from '../models/Expense'
+import User from '../models/User'
+import helpers from '../helpers'
+
+const router = express.Router({ mergeParams: true });
 
 
 //Routes
 //Expense - INDEX: GET: Show all the expenses for this user
-router.get("/", middlware.validateLoggedIn, (req, res) => {
+router.get("/", middleware.validateLoggedIn, (req, res) => {
     User.findById(req.session._id).populate("expenses").exec((err, foundUser) => {
         if (err){
             console.log(err);
@@ -24,7 +25,7 @@ router.get("/", middlware.validateLoggedIn, (req, res) => {
 
 
 //Expense - SHOW: GET: Show info about expenses of category X for a given month
-router.get("/:month/:year",  middlware.validateLoggedIn, middlware.validateMonthInput, (req, res) => {
+router.get("/:month/:year",  middleware.validateLoggedIn, middleware.validateMonthInput, (req, res) => {
     User.findById(req.session._id).populate("expenses").exec((err, foundUser) => {
         if (err){
             console.log(err);
@@ -51,12 +52,12 @@ router.get("/:month/:year",  middlware.validateLoggedIn, middlware.validateMonth
 })
 
 //Expense - NEW: GET: Show the form to add create a new expense
-router.get("/new", middlware.validateLoggedIn, (req, res) => {
+router.get("/new", middleware.validateLoggedIn, (req, res) => {
     res.render("expense/new");
 });
 
 //Expense - CREATE: POST: create the new expense and redirect to show all expenses
-router.post("/", middlware.validateLoggedIn, middlware.validateExpenseInput, (req, res) => {
+router.post("/", middleware.validateLoggedIn, middleware.validateExpenseInput, (req, res) => {
     //find the relevent user
     User.findById(req.session._id, (err, foundUser) => {
         if (err){

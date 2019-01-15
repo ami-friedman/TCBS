@@ -2,15 +2,15 @@
  * 
  */
 //Required modules
-const express        = require("express"),
-      budgetRouter   = require("./routes/budget"),   
-      expenseRouter  = require("./routes/expense"),
-      indexRouter    = require("./routes/index"),
-      mongoose       = require("mongoose"),
-      bodyParser     = require("body-parser"),
-      User           = require("./models/User"),
-      helpers        = require("./helpers"),
-      expressSession = require("express-session");
+import express from 'express';
+import budgetRouter from './routes/budget'
+import expenseRouter from './routes/index'
+import indexRouter from './routes/expense'
+import mongoose from 'mongoose'
+import bodyParser from 'body-parser'
+import helpers from './helpers'
+import expressSession from 'express-session'
+
 
 const app = express();
 require('dotenv').load();

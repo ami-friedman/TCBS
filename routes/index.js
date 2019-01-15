@@ -1,7 +1,7 @@
-const User = require("../models/User");
+import User from '../models/User'
+import express from 'express'
 
-const express = require("express");
-router = express.Router({ mergeParams: true });
+const router = express.Router({ mergeParams: true });
 
 
 router.get("/", (req, res) => {

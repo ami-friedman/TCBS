@@ -1,4 +1,4 @@
-const __  = require("underscore");
+import __  from 'underscore'
 
 
 const validMonths = [
