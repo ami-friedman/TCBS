@@ -20,8 +20,6 @@ const budgetSchema = new mongoose.Schema({
             amount: Number,
         }
     ],
-    month: String,
-    year: String,
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",

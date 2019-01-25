@@ -25,8 +25,10 @@
 ### DB Schema
 #### User:
 ```
-firstName : string
-lastName : string 
+name: {
+    first : string
+    last  : string
+} 
 email : string : unique
 password : string
 ```

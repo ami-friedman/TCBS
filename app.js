@@ -1,21 +1,16 @@
-/**
- * 
- */
-//Required modules
 import express from 'express';
-import budgetRouter from './routes/budget'
-import expenseRouter from './routes/index'
-import indexRouter from './routes/expense'
+import budgetRouter from './src/routes/budget'
+import expenseRouter from './src/routes/expense'
+import indexRouter from './src/routes/index'
+import accountRouter from './src/routes/account'
 import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
-import helpers from './helpers'
+import helpers from './src/common/helpers'
 import expressSession from 'express-session'
 
 
 const app = express();
 require('dotenv').load();
-
-
 
 console.log("Configuring the application");
 
@@ -36,6 +31,7 @@ app.use((req, res, next) => {
 app.use("/", indexRouter);
 app.use("/budget", budgetRouter);
 app.use("/expense", expenseRouter);
+app.use("/account", accountRouter);
 
 console.log("Connection to the DB");
 mongoose.connect(`mongodb://${process.env.LOCAL_DB}`,{ useNewUrlParser: true });

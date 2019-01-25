@@ -3,21 +3,18 @@ import express from 'express'
 import middleware from '../middleware'
 import Budget from '../models/Budget'
 import User from '../models/User'
-import helpers from '../helpers'
+import helpers from '../common/helpers'
 
 const router = express.Router({ mergeParams: true });
 
 //Baeline Budget - INDEX: GET: Show the baseline budget for this user
 router.get("/", middleware.validateLoggedIn, async (req, res) => {
-    //find baseline budget for this user and return
-    try {
-        let foundUser = await User.findById(req.session._id).populate("baselineBudget");
-        //error handling if user not found or budget is more generically handledd in index.ejs
-        res.render("budget/index", { budget: foundUser.baselineBudget });
-    } catch(error) {
-        console.log(error);
-        res.redirect("/budegt");
+    let budget = new Budget();
+    let budgetProps = await budget.findByUserId(req.session._id);
+    if (!budgetProps.id) {
+        return res.redirect('budget/new');
     }
+    res.render('budget/index', { budget: budgetProps });
 })
 
 //Baeline Budget - INDEX: GET: Show the monthly budget for this user
@@ -37,8 +34,6 @@ router.get("/:month/:year", middleware.validateLoggedIn, async (req, res) => {
     }
 })
 
-
-
 //Baseline Budget - NEW: GET: Show the form for adding a new baseline budget
 router.get("/new", middleware.validateLoggedIn, (req, res) => {
     res.render("budget/new");
@@ -47,20 +42,13 @@ router.get("/new", middleware.validateLoggedIn, (req, res) => {
 
 // Budget - NEW: POST: Handle the form action for a new baseline
 router.post("/new", middleware.validateLoggedIn, async (req, res) => {
-    try {
-        let foundUser = await User.findById(req.session._id);
-        if (foundUser) {
-            let newBudget = await Budget.create(req.body);
-            if (newBudget) {
-                foundUser.baselineBudget = newBudget._id;
-                foundUser.save();
-            }
-            res.redirect("/budget");
-        }
-    } catch(error) {
-        console.log(error);
-        res.redirect("/budegt");
-    }
+    // Add the userId to the budget object
+    req.body.userId = req.session._id; 
+    // Create a new budget with an ID
+    console.log('post: budget/new:', req.body);
+    let budget = new Budget();
+    budget.create(req.body);
+    res.redirect('/budget');
 });
 
 //Baseline Budget - NEW: GET: Show the form for adding a new monthly budget

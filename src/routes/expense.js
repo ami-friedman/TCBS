@@ -3,7 +3,7 @@ import express from 'express'
 import middleware from '../middleware'
 import Expense from '../models/Expense'
 import User from '../models/User'
-import helpers from '../helpers'
+import helpers from '../common/helpers'
 
 const router = express.Router({ mergeParams: true });
 
