@@ -1,0 +1,11 @@
+<span *ngIf="!isEditMode" (click)="enterEditMode()">
+  {{ value }}
+</span>
+
+<span *ngIf="isEditMode">
+  <input class="border-0" type="text" 
+  #input 
+  [value]="value" 
+  (keyup)="value = input.value" 
+  (keyup.enter)="emitNewValueAndExitEditMode()">
+</span> 
