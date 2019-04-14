@@ -1,3 +1,19 @@
-<p>
-  category works!
-</p>
+<div class="container">
+  <table class="table table-sm">
+    <tr>
+      <th scope="col">name</th>
+      <th scope="col">amount</th>
+    </tr>
+    <tr *ngFor="let item of items | keyvalue">
+      <td><inline-edit [initialValue]="item.key" (valueChange)="item.key = $event"></inline-edit></td>
+      <td><inline-edit [initialValue]="item.value" (valueChange)="item.value = $event"></inline-edit>
+     </td>
+    </tr>
+  </table>
+  <div>
+
+    <hr />
+    <input type="text" [(ngModel)]="name" placeholder="Expense name" />
+    <input type="text" [(ngModel)]="amount" placeholder="Epense amount" />
+    <button (click)=addExpense()>Add</button>
+  </div>
