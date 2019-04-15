@@ -8,6 +8,9 @@ import { LoginComponent } from './login/login.component';
 import { BudgetComponent } from './budget/budget.component';
 import { InlineEditComponent } from './inline-edit/inline-edit.component';
 import { CategoryComponent } from './category/category.component';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from 'src/environments/environment';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -21,9 +24,13 @@ import { CategoryComponent } from './category/category.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
     
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
+
 })
 export class AppModule { }

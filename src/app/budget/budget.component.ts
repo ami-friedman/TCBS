@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Budget } from 'src/modules/budget';
+import { BudgetService } from '../services/budget.service';
 
 @Component({
   selector: 'budget',
@@ -8,27 +9,36 @@ import { Budget } from 'src/modules/budget';
 })
 export class BudgetComponent {
 
-  userId = 'RpgoZH0kaRRJnGuquAg3';
+  userId = 'RpgoZH0kaRRJnGuquAg4Í';
 
-  budget: Budget = {
-    category1: {},
-    category2: {},
-    category3: {},
-  }
-  name: string;
-  amount: number;
-  
+  budget: Budget;
 
-  constructor() { 
-   
+  constructor(private budgetService: BudgetService) {
+    this.budgetService.get(this.userId, 2019).subscribe( budget => {
+      console.log('budget:', budget);
+      this.budget = budget
+    }); 
   }
 
- addExpense(){
-   this.budget.category1[this.name] = this.amount;
+  create() {
+    this.budget = {
+      category1: {
 
-   this.name = null;
-   this.amount = null;
+      },
+      category2: {
 
- }
+      },
+      category3: {
+
+      },
+    }
+    this.budgetService.create(this.userId, 2019, this.budget);    
+  }
+
+  update() {
+    this.budgetService.update(this.userId, 2019, this.budget);
+  }
+
+
 
 }

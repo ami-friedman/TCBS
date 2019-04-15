@@ -1,8 +1,8 @@
 <div class="container">
   <table class="table table-sm">
     <tr>
-      <th scope="col">name</th>
-      <th scope="col">amount</th>
+      <th scope="col">Expense Name</th>
+      <th scope="col">Expense Amount</th>
     </tr>
     <tr *ngFor="let item of items | keyvalue">
       <td><inline-edit [initialValue]="item.key" (valueChange)="item.key = $event"></inline-edit></td>

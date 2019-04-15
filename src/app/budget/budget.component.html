@@ -1,20 +1,14 @@
-<h1>Category 1</h1>
-<div class="container">
-  <table class="table table-sm">
-    <tr>
-      <th scope="col">name</th>
-      <th scope="col">amount</th>
-    </tr>
-    <tr *ngFor="let item of budget.category1 | keyvalue">
-      <td><inline-edit [initialValue]="item.key" (valueChange)="item.key = $event"></inline-edit></td>
-      <td><inline-edit [initialValue]="item.value" (valueChange)="item.value = $event"></inline-edit>
-     </td>
-    </tr>
-  </table>
-  <div>
+<div *ngIf="budget">
+    <h1>Categroy 1</h1>
+    <category [items]="budget.category1" (newItems)="update()"></category>
+    
+    <h1>Categroy 2</h1>
+    <category [items]="budget.category2" (newItems)="update()"></category>
+    
+    <h1>Categroy 3</h1>
+    <category [items]="budget.category3" (newItems)="update()"></category>  
+</div>
 
-    <hr />
-    <input type="text" [(ngModel)]="name" placeholder="Expense name" />
-    <input type="text" [(ngModel)]="amount" placeholder="Epense amount" />
-    <button (click)=addExpense()>Add</button>
-  </div>
+<div *ngIf="!budget">
+   <button (click)="create()">Create</button>
+</div>

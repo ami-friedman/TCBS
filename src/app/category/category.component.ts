@@ -1,15 +1,16 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
-import { BudgetItems } from 'src/modules/budget';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { ExpenseItems } from 'src/modules/budget';
+
 
 @Component({
-  selector: 'app-category',
+  selector: 'category',
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.css']
 })
 export class CategoryComponent {
 
-  @Input('items') items: BudgetItems;
-  @Output('newItems') newItems: BudgetItems;
+  @Input('items') items: ExpenseItems;
+  @Output('newItems') newItems = new EventEmitter();
 
   name: string;
   amount: number;
@@ -21,6 +22,7 @@ export class CategoryComponent {
  
     this.name = null;
     this.amount = null;
+    this.newItems.emit();
    }
 
   
