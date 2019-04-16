@@ -8,7 +8,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class InlineEditComponent {
 
   @Input('initialValue') value;
-  @Input('type') type = 'text';
   @Output() valueChange = new EventEmitter();
 
   isEditMode = false;

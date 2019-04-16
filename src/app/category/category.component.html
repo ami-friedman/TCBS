@@ -6,15 +6,16 @@
     </tr>
     <tr *ngFor="let item of items | keyvalue">
       <td><inline-edit [initialValue]="item.key"  (valueChange)="item.key = $event"></inline-edit></td>
-      <td><inline-edit [initialValue]="item.value" [type]="number" (valueChange)="item.value = $event"></inline-edit>
+      <td><inline-edit [initialValue]="item.value" (valueChange)="item.value = $event"></inline-edit>
      </td>
     </tr>
-    <th> Total: {{ total }} </th>
+    <th> Total:</th>
+    <th> {{ total }} </th>
   </table>
   <div>
 
     <hr />
-    <input [type]="text" [(ngModel)]="name" placeholder="Expense name" />
-    <input [type]="number" [(ngModel)]="amount" placeholder="Epense amount" />
+    <input type="text" [(ngModel)]="name" placeholder="Expense name" />
+    <input type="number" [(ngModel)]="amount" placeholder="Epense amount" />
     <button (click)=addExpense()>Add</button>
   </div>
