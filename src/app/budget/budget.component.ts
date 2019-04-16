@@ -15,7 +15,6 @@ export class BudgetComponent {
 
   constructor(private budgetService: BudgetService) {
     this.budgetService.get(this.userId, 2019).subscribe( budget => {
-      console.log('budget:', budget);
       this.budget = budget
     }); 
   }
