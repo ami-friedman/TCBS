@@ -1,10 +1,3 @@
-# TCBS
-A simple web application to manage your budget according to the Three Category Budgeting System.
+# Tcbs
 
-# Technology stack: MEN
-DB: MongoDB
-BE: Node, ExpressJS
-FE: HTML, CSS, JS, jQuery, EJS, Bootstrap
-
-
-
+A home owner budgeting system geared towards the "Three Category Budget" concept 
