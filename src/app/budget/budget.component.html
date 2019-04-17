@@ -1,14 +1,18 @@
-<div *ngIf="budget">
-    <h1>Categroy 1</h1>
-    <category [items]="budget.category1" (newItems)="update()"></category>
-    
-    <h1>Categroy 2</h1>
-    <category [items]="budget.category2" (newItems)="update()"></category>
-    
-    <h1>Categroy 3</h1>
-    <category [items]="budget.category3" (newItems)="update()"></category>  
-</div>
-
 <div *ngIf="!budget">
    <button (click)="create()">Create</button>
+</div>
+
+
+<div *ngIf="budget">
+        <tabset>
+          <tab heading="Categroy 1" id="tab1">
+                <category [items]="budget.category1" (newItems)="update()"></category>
+          </tab>
+          <tab heading="Categroy 2">
+                <category [items]="budget.category2" (newItems)="update()"></category>
+          </tab>
+          <tab heading="Categroy 3">
+                <category [items]="budget.category3" (newItems)="update()"></category>  
+          </tab>
+        </tabset>
 </div>

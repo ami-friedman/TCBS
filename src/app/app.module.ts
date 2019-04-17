@@ -11,6 +11,7 @@ import { CategoryComponent } from './category/category.component';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    TabsModule.forRoot(),
     
   ],
   providers: [],

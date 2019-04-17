@@ -26,7 +26,17 @@ export class CategoryComponent {
   }
 
   get total() {
-    console.log(Object.values(this.items));
     return _.sum(_.values(this.items));
+  }
+
+  updateKey(oldKey, newKey) {
+    this.items[newKey] = this.items[oldKey];
+    delete this.items[oldKey];
+    this.newItems.emit();
+  }
+
+  updateAmount(item, newAmount) {
+    this.items[item] = Number(newAmount);
+    this.newItems.emit();
   }
 }
