@@ -9,8 +9,8 @@ import _  from 'lodash';
 })
 export class CategoryComponent {
 
-  @Input('items') items: ExpenseItems;
-  @Output('newItems') newItems = new EventEmitter();
+  @Input('items') expenses: ExpenseItems;
+  @Output('newItems') newExpenses = new EventEmitter();
 
   name: string;
   amount: number;
@@ -18,25 +18,25 @@ export class CategoryComponent {
   constructor() { }
 
   addExpense() {
-    this.items[this.name] = this.amount;
+    this.expenses[this.name] = this.amount;
 
     this.name = null;
     this.amount = null;
-    this.newItems.emit();
+    this.newExpenses.emit();
   }
 
   get total() {
-    return _.sum(_.values(this.items));
+    return _.sum(_.values(this.expenses));
   }
 
-  updateKey(oldKey, newKey) {
-    this.items[newKey] = this.items[oldKey];
-    delete this.items[oldKey];
-    this.newItems.emit();
+  updateName(oldName, newName) {
+    this.expenses[newName] = this.expenses[oldName];
+    delete this.expenses[oldName];
+    this.newExpenses.emit();
   }
 
-  updateAmount(item, newAmount) {
-    this.items[item] = Number(newAmount);
-    this.newItems.emit();
+  updateAmount(expense, newAmount) {
+    this.expenses[expense] = Number(newAmount);
+    this.newExpenses.emit();
   }
 }

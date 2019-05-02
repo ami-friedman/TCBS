@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Budget } from 'src/modules/budget';
 import { BudgetService } from '../services/budget.service';
 import { Subscription } from 'rxjs';
@@ -8,22 +8,30 @@ import { Subscription } from 'rxjs';
   templateUrl: './budget.component.html',
   styleUrls: ['./budget.component.css']
 })
-export class BudgetComponent implements OnDestroy {
+export class BudgetComponent implements OnInit, OnDestroy {
 
-  private userId = 'RpgoZH0kaRRJnGuquAg4Í';
-  private year = 2019;
+  //TODO: Make this dynamic and move to global/env
+  private userId = 'RpgoZH0kaRRJnGuquAg4I2';
+  year = 2019;
   
   subscription: Subscription;
   budget: Budget;
 
-  constructor(private budgetService: BudgetService) {
+  constructor(private budgetService: BudgetService) {    
+  }
+
+  ngOnInit() {
     this.subscription = this.budgetService.get(this.userId, this.year)
     .subscribe( budget => {
+      if (!budget) {
+        // This will re-trigger the observable - consider improving
+        this.create();
+      }
       this.budget = budget
     }); 
   }
 
-  create() {
+  private create() {
    this.initBudget();
    this.budgetService.create(this.userId, this.year, this.budget);    
   }
