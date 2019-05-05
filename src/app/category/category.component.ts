@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { ExpenseItems } from 'src/modules/budget';
+import { Expenses } from 'src/modules/budget';
 import _  from 'lodash';
 
 @Component({
@@ -9,8 +9,8 @@ import _  from 'lodash';
 })
 export class CategoryComponent {
 
-  @Input('items') expenses: ExpenseItems;
-  @Output('newItems') newExpenses = new EventEmitter();
+  @Input('expenses') expenses: Expenses;
+  @Output('newExpenses') newExpenses = new EventEmitter();
 
   name: string;
   amount: number;

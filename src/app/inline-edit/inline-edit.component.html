@@ -1,14 +1,14 @@
-<span *ngIf="!isEditMode" (click)="enterEditMode()">
-    <span *ngIf="isCurrency">
+<span id="display-mode-wrapper" *ngIf="!isEditMode" (click)="enterEditMode()">
+    <span id="currency-wrapper" *ngIf="isCurrency">
         {{ value | currency:'ILS' }}
    </span>
-    <span *ngIf="!isCurrency">
+    <span id="non-currency-wrapper" *ngIf="!isCurrency">
         {{ value }}
    </span>
 </span>
 
-<span *ngIf="isEditMode">
-    <input class="border-0"
+<span id="edit-mode-wrapper" *ngIf="isEditMode">
+    <input id="input"  class="border-0"
         #input 
         [type]=" isCurrency? number : text"
         [value]="value" 

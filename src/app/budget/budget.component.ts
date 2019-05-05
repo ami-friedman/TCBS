@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 export class BudgetComponent implements OnInit, OnDestroy {
 
   //TODO: Make this dynamic and move to global/env
-  private userId = 'RpgoZH0kaRRJnGuquAg4I2';
+  private userId = '1234';
   year = 2019;
   
   subscription: Subscription;
