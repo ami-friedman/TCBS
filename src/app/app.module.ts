@@ -12,6 +12,7 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,12 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    RouterModule.forRoot(
+     [
+       { path: 'budget', component: BudgetComponent },
+       { path: 'budget/:year', component: BudgetComponent },
+     ] 
+    ),
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
