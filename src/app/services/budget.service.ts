@@ -10,29 +10,29 @@ import { map } from 'rxjs/operators';
 export class BudgetService {
 
 
-  constructor(private afs: AngularFirestore) { 
+  constructor(private db: AngularFirestore) { 
   }
 
   create(userId: string, year: number, budget: Budget){
-    let newBudget = {};
-    newBudget[year] = budget;
-    const doc = this.afs.doc(`budgets/${userId}`);
-    doc.set(newBudget);
+    this.createOrUpdate(userId, year, budget, false);
   }
 
+  update(userId: string, year: number, budget: Budget) {
+    this.createOrUpdate(userId, year, budget, false);
+  }
 
   get(userId: string, year: number) {
-    return this.afs.doc(`budgets/${userId}`).valueChanges()
+    return this.db.doc(`budgets/${userId}`).valueChanges()
     .pipe(map( x => {
       if (x) return x[year];
       return x;
     }));
-  }
+  }  
 
-  update(userId: string, year: number, budget: Budget) {
+  private createOrUpdate(userId: string, year: number, budget: Budget, update: boolean) {
     let newBudget = {};
     newBudget[year] = budget;
-    const doc = this.afs.doc(`budgets/${userId}`);
-    doc.update(newBudget);
+    const doc = this.db.doc(`budgets/${userId}`);
+    update ? doc.update(newBudget) : doc.set(newBudget);
   }
 }

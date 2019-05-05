@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { ExpenseItems } from 'src/modules/budget';
+import { Expenses } from 'src/modules/budget';
 import _  from 'lodash';
 
 @Component({
@@ -9,8 +9,8 @@ import _  from 'lodash';
 })
 export class CategoryComponent {
 
-  @Input('items') items: ExpenseItems;
-  @Output('newItems') newItems = new EventEmitter();
+  @Input('expenses') expenses: Expenses;
+  @Output('newExpenses') newExpenses = new EventEmitter();
 
   name: string;
   amount: number;
@@ -18,15 +18,25 @@ export class CategoryComponent {
   constructor() { }
 
   addExpense() {
-    this.items[this.name] = this.amount;
+    this.expenses[this.name] = this.amount;
 
     this.name = null;
     this.amount = null;
-    this.newItems.emit();
+    this.newExpenses.emit();
   }
 
   get total() {
-    console.log(Object.values(this.items));
-    return _.sum(_.values(this.items));
+    return _.sum(_.values(this.expenses));
+  }
+
+  updateName(oldName, newName) {
+    this.expenses[newName] = this.expenses[oldName];
+    delete this.expenses[oldName];
+    this.newExpenses.emit();
+  }
+
+  updateAmount(expense, newAmount) {
+    this.expenses[expense] = Number(newAmount);
+    this.newExpenses.emit();
   }
 }

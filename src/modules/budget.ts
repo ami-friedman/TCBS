@@ -1,9 +1,9 @@
-export interface ExpenseItems {
+export interface Expenses {
     [name:string]:number
 }
 
 export interface Budget {
-    category1: ExpenseItems,
-    category2: ExpenseItems,
-    category3: ExpenseItems,
+    category1: Expenses,
+    category2: Expenses,
+    category3: Expenses,
 }
