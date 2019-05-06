@@ -1,0 +1,7 @@
+<select>
+    <option>Select...</option>
+  <option *ngFor="let item of items | keyvalue" [ngValue]="item.key">{{ item.key }}</option>
+</select>
+
+<button (click)="add()">Add</button>
+<button (click)="remove()">Remove</button>

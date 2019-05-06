@@ -13,6 +13,8 @@ import { environment } from 'src/environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { RouterModule } from '@angular/router';
+import { ExpenseComponent } from './expense/expense.component';
+import { TestComponent } from './test/test.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { RouterModule } from '@angular/router';
     LoginComponent,
     BudgetComponent,
     InlineEditComponent,
-    CategoryComponent
+    CategoryComponent,
+    ExpenseComponent,
+    TestComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,6 +33,9 @@ import { RouterModule } from '@angular/router';
      [
        { path: 'budget', component: BudgetComponent },
        { path: 'budget/:year', component: BudgetComponent },
+      
+       { path: 'expense', component: ExpenseComponent },
+       { path: 'expense/:year:/month', component: ExpenseComponent },
      ] 
     ),
     FormsModule,

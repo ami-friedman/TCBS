@@ -1,3 +1,4 @@
+
 export interface Expenses {
     [name:string]:number
 }
@@ -7,3 +8,8 @@ export interface Budget {
     category2: Expenses,
     category3: Expenses,
 }
+
+export type Expense = Budget;
+
+
+
