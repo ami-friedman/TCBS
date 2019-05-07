@@ -10,7 +10,7 @@ import { Expenses } from '../modules/expenses';
 export class BudgetCategoryTableComponent {
 
   @Input('expenses') expenses: Expenses;
-  @Output('newExpenses') newExpenses = new EventEmitter();
+  @Output('newExpenses') updatedExpenses = new EventEmitter();
 
   newExpenseName: string;
   newExpenseAmount: number;
@@ -26,7 +26,7 @@ export class BudgetCategoryTableComponent {
     this.newExpenseName = null;
     this.newExpenseAmount = null;
 
-    this.newExpenses.emit();
+    this.updatedExpenses.emit();
   }
 
   get total() {
@@ -35,6 +35,6 @@ export class BudgetCategoryTableComponent {
 
   removeItem(name) {
     delete this.expenses[name];
-    this.newExpenses.emit();
+    this.updatedExpenses.emit();
   }
 }

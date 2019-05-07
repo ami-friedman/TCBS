@@ -38,7 +38,7 @@
               <div class="form-group col">
                 <select class="form-control" (change)="listChange($event)" id="power" required>
                     <option>Select...</option>
-                  <option *ngFor="let expense of localBudgetExpenses | keyvalue" [value]="expense.key">{{ expense.key }}</option>
+                  <option *ngFor="let expense of expensesDropdown | keyvalue" [value]="expense.key">{{ expense.key }}</option>
                 </select>
             </div>
     

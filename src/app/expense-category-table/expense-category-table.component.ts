@@ -14,23 +14,28 @@ export class ExpenseCategoryTableComponent implements OnInit {
   @Input()  budgetExpenses: Expenses;
   @Output() updatedExpenses = new EventEmitter();
 
-  localBudgetExpenses;
+  expensesDropdown;
   newExpenseName;
   newExpenseAmount;
 
   constructor() { }
 
   ngOnInit() {
-    // Mutation is required in this component. Creating local copy in order not to affect the original budget  
-    //TODO: Handle the case of original budget changing during expense creation
-    this.localBudgetExpenses = {...this.budgetExpenses};
+    // TODO: Handle the case of original budget changing during expense creation
+    
+    this.expensesDropdown = {...this.budgetExpenses};
+
+    // We only want the un-accounter-for expenses in the dropdown
+    for (let expense in this.expenses) {
+      delete this.expensesDropdown[expense];
+    }
   }
 
   addExpense() {
     this.expenses[this.newExpenseName] = this.newExpenseAmount;
 
     // Update the local budget copy in order for the dropdown to display only relevant expenses on the list
-    delete this.localBudgetExpenses[this.newExpenseName];
+    delete this.expensesDropdown[this.newExpenseName];
 
     this.newExpenseName = null;
     this.newExpenseAmount = null;

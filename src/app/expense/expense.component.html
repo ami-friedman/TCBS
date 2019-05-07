@@ -9,15 +9,15 @@
 <div *ngIf="budget && budgetExists && expense">
       <tabset>
             <tab heading="Category 1">
-                  <expense-category-table [expenses]="expense.category1" [budgetExpenses]="budget.category1" (newExpenses)="update()">
+                  <expense-category-table [expenses]="expense.category1" [budgetExpenses]="budget.category1" (updatedExpenses)="update()">
                   </expense-category-table>
             </tab>
             <tab heading="Category 2">
-                  <expense-category-table [expenses]="expense.category2" [budgetExpenses]="budget.category2" (newExpenses)="update()">
+                  <expense-category-table [expenses]="expense.category2" [budgetExpenses]="budget.category2" (updatedExpenses)="update()">
                   </expense-category-table>
             </tab>
             <tab heading="Category 3">
-                  <expense-category-table [expenses]="expense.category3" [budgetExpenses]="budget.category3" (newExpenses)="update()">
+                  <expense-category-table [expenses]="expense.category3" [budgetExpenses]="budget.category3" (updatedExpenses)="update()">
                   </expense-category-table>
             </tab>
       </tabset>
