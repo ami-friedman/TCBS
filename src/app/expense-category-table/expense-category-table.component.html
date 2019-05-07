@@ -30,17 +30,27 @@
       <th></th>
       <th></th>
     </table>
-  
-  
-    <div id="input-container">  
-      <select (change)="listChange($event)">
-          <option>Select...</option>
-        <option *ngFor="let expense of localBudgetExpenses | keyvalue" [ngValue]="expense.key">{{ expense.key }}</option>
-      </select>
-      
-      <input type="number" [(ngModel)]="newExpenseAmount" placeholder="Expense amount" />
-  
-      <button (click)=addExpense() class="btn btn-primary btn-sm">Add</button>
-  
-    </div>
+
+
+    <div id="container">
+        <form (ngSubmit)="addExpense()" #expForm="ngForm">
+          <div class="form-row">
+              <div class="form-group col">
+                <select class="form-control" (change)="listChange($event)" id="power" required>
+                    <option>Select...</option>
+                  <option *ngFor="let expense of localBudgetExpenses | keyvalue" [value]="expense.key">{{ expense.key }}</option>
+                </select>
+            </div>
+    
+            <div class="form-group col">
+              <input style="margin:0;" type="number" class="form-control" name="newExpenseAmount" [(ngModel)]="newExpenseAmount"
+                id="newExpenseAmount" placeholder="Expense amount" required>
+            </div>
+    
+            <div class="col">
+              <button style="margin:0;" type="submit" class="btn btn-success" [disabled]="!expForm.form.valid">Add</button>
+            </div>
+          </div>
+        </form>
+      </div>
   </div>
