@@ -1,4 +1,4 @@
-<div *ngIf="!budget && budgetExists" >
+<div *ngIf="!budget && !expense && budgetExists" >
       Loading...
 </div>
 
@@ -6,7 +6,7 @@
             No budget found for this year or month
 </div>
 
-<div *ngIf="budget && budgetExists">
+<div *ngIf="budget && budgetExists && expense">
       <tabset>
             <tab heading="Category 1">
                   <expense-category-table [expenses]="expense.category1" [budgetExpenses]="budget.category1" (newExpenses)="update()">
