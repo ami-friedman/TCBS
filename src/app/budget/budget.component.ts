@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Budget } from 'src/modules/budget';
+import { Budget } from 'src/app/modules/budget';
 import { BudgetService } from '../services/budget.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';

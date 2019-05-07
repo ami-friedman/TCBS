@@ -1,0 +1,32 @@
+<div class="container">
+    <table class="table table-sm">
+      <tr>
+        <th scope="col">Expense Name</th>
+        <th scope="col">Expense Amount</th>
+        <th></th>
+      </tr>
+      <tr *ngFor="let expense of expenses | keyvalue">
+        <td>
+          {{ expense.key }}
+        </td>
+        <td>
+          {{ expense.value | currency:'ILS' }}      
+        </td>
+        <td style="cursor: pointer;" (click)="removeItem(expense.key)">
+          -
+        </td>
+      </tr>
+      <th> Total:</th>
+      <th>{{ total | currency:'ILS' }}</th>
+      <th></th>
+    </table>
+  
+  
+    <div id="input-container">  
+      <input type="text" [(ngModel)]="name" placeholder="Expense name" />
+      <input type="number" [(ngModel)]="newExpenseAmount" placeholder="Expense amount" />
+  
+      <button (click)=addExpense() class="btn btn-primary btn-sm">Add</button>
+  
+    </div>
+  </div>

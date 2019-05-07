@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { Expense, Budget } from 'src/modules/budget';
+import { Budget } from 'src/app/modules/budget';
 import { BudgetService } from '../services/budget.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { Expense } from '../modules/expenses';
 
 @Component({
   selector: 'expense',
@@ -13,6 +14,7 @@ export class ExpenseComponent {
 
   expense: Expense;
   budget: Budget;
+  budgetExists = true;
 
   private userId = '1234';
   private year;
@@ -21,12 +23,14 @@ export class ExpenseComponent {
 
   constructor(private budgetService: BudgetService, route: ActivatedRoute) { 
     this.initExpense();
-    this.year = 2019;
+    this.year = this.year = route.snapshot.paramMap.get('year') || new Date().getFullYear();
   }
 
   ngOnInit() {
     this.subscription = this.budgetService.get(this.userId, this.year)
     .subscribe( budget => {
+      if (!budget) this.budgetExists = false;
+
       this.budget = budget;
     }); 
   }

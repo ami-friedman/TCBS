@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { BudgetComponent } from './budget/budget.component';
 import { InlineEditComponent } from './inline-edit/inline-edit.component';
-import { CategoryComponent } from './category/category.component';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -15,6 +14,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { RouterModule } from '@angular/router';
 import { ExpenseComponent } from './expense/expense.component';
 import { TestComponent } from './test/test.component';
+import { ExpenseCategoryTableComponent } from './expense-category-table/expense-category-table.component';
+import { BudgetCategoryTableComponent } from './budget-category-table/budget-category-table.component';
 
 @NgModule({
   declarations: [
@@ -22,9 +23,10 @@ import { TestComponent } from './test/test.component';
     LoginComponent,
     BudgetComponent,
     InlineEditComponent,
-    CategoryComponent,
     ExpenseComponent,
     TestComponent,
+    ExpenseCategoryTableComponent,
+    BudgetCategoryTableComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,7 @@ import { TestComponent } from './test/test.component';
        { path: 'budget/:year', component: BudgetComponent },
       
        { path: 'expense', component: ExpenseComponent },
-       { path: 'expense/:year:/month', component: ExpenseComponent },
+       { path: 'expense/:month/:year', component: ExpenseComponent },
      ] 
     ),
     FormsModule,

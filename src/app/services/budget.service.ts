@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Budget } from 'src/modules/budget';
+import { Budget } from 'src/app/modules/budget';
 import { map } from 'rxjs/operators';
 
 

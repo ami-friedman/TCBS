@@ -1,7 +1,6 @@
+import { Expenses } from './expenses';
 
-export interface Expenses {
-    [name:string]:number
-}
+
 
 export interface Budget {
     category1: Expenses,
@@ -9,7 +8,7 @@ export interface Budget {
     category3: Expenses,
 }
 
-export type Expense = Budget;
+
 
 
 
