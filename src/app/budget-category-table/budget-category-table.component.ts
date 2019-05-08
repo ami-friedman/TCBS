@@ -10,7 +10,7 @@ import { Expenses } from '../modules/expenses';
 export class BudgetCategoryTableComponent {
 
   @Input('expenses') expenses: Expenses;
-  @Output('newExpenses') updatedExpenses = new EventEmitter();
+  @Output('updatedExpenses') updatedExpenses = new EventEmitter();
 
   newExpenseName: string;
   newExpenseAmount: number;

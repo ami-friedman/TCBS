@@ -58,7 +58,6 @@ export class ExpenseComponent {
   }
 
   update() {
-    console.log('called');
     this.expenseService.update(this.userId, this.month, this.year, this.expense);
   }
 
