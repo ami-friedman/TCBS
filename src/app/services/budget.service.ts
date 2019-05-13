@@ -25,6 +25,14 @@ export class BudgetService {
     return this.db.doc(`budgets/${userId}`).valueChanges()
     .pipe(map( x => {
       if (x) return x[year];
+      return undefined;
+    }));
+  }  
+
+  getAllYears(userId: string) {
+    return this.db.doc(`budgets/${userId}`).valueChanges()
+    .pipe(map( x => {
+      if (x) return Object.keys(x);
       return x;
     }));
   }  

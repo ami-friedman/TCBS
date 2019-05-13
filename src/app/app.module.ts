@@ -16,6 +16,7 @@ import { ExpenseComponent } from './expense/expense.component';
 import { TestComponent } from './test/test.component';
 import { ExpenseCategoryTableComponent } from './expense-category-table/expense-category-table.component';
 import { BudgetCategoryTableComponent } from './budget-category-table/budget-category-table.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { BudgetCategoryTableComponent } from './budget-category-table/budget-cat
     TestComponent,
     ExpenseCategoryTableComponent,
     BudgetCategoryTableComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,

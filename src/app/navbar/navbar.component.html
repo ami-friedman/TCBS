@@ -1,0 +1,24 @@
+
+    <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link" class="pointer" (click)="toggleBudget()">
+                <span *ngIf="shouldExpand()">+</span>
+                <span *ngIf="!shouldExpand()">-</span>
+                Budgets</a>
+            </li>
+            <li *ngFor="let year of yearsLinks">
+                <a class="nav-link" routerLink="/budget/{{year}}">{{ year }}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/expense/5/2019">Expense</a>
+            </li>
+              <li *ngFor="let year of expenseYears">
+                  <a class="nav-link" routerLink="/budget/{{year}}">{{ year }}</a>
+                  <ul class="nav flex-column">
+                      <li *ngFor="let month of expenseMonths">
+                          <a class="nav-link" routerLink="/budget/{{year}}/{{month}}">{{ month }}</a>
+                      </li>
+                  </ul>
+              </li>
+    </ul>
+

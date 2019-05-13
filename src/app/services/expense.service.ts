@@ -27,6 +27,22 @@ export class ExpenseService {
     }));
   }  
 
+  getAllYears(userId: string) {
+    return this.db.doc(`expenses/${userId}`).valueChanges()
+    .pipe(map( x => {
+      if (x) return Object.keys(x);
+      return x;
+    }));
+  }
+
+  getAllMonths(userId: string, year: string) {
+    return this.db.doc(`expenses/${userId}`).valueChanges()
+    .pipe(map( x => {
+      if (x) return Object.keys(x[year]);
+      return x;
+    }));
+  }  
+
   private createOrUpdate(userId: string, month: number, year: number, expense: Expense, update: boolean) {
     let newExpense = {};
     let temp = {}
