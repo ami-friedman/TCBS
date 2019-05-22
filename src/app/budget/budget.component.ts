@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Budget } from 'src/modules/budget';
+import { Budget } from 'src/app/modules/budget';
 import { BudgetService } from '../services/budget.service';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'budget',
@@ -12,12 +13,13 @@ export class BudgetComponent implements OnInit, OnDestroy {
 
   //TODO: Make this dynamic and move to global/env
   private userId = '1234';
-  year = 2019;
+  private year;
   
   subscription: Subscription;
   budget: Budget;
 
-  constructor(private budgetService: BudgetService) {    
+  constructor(private budgetService: BudgetService, route: ActivatedRoute) {    
+    this.year = route.snapshot.paramMap.get('year') || new Date().getFullYear();
   }
 
   ngOnInit() {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Budget } from 'src/modules/budget';
+import { Budget } from 'src/app/modules/budget';
 import { map } from 'rxjs/operators';
 
 
@@ -25,6 +25,14 @@ export class BudgetService {
     return this.db.doc(`budgets/${userId}`).valueChanges()
     .pipe(map( x => {
       if (x) return x[year];
+      return undefined;
+    }));
+  }  
+
+  getAllYears(userId: string) {
+    return this.db.doc(`budgets/${userId}`).valueChanges()
+    .pipe(map( x => {
+      if (x) return Object.keys(x);
       return x;
     }));
   }  

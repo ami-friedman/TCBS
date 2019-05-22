@@ -7,11 +7,16 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { BudgetComponent } from './budget/budget.component';
 import { InlineEditComponent } from './inline-edit/inline-edit.component';
-import { CategoryComponent } from './category/category.component';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { RouterModule } from '@angular/router';
+import { ExpenseComponent } from './expense/expense.component';
+import { TestComponent } from './test/test.component';
+import { ExpenseCategoryTableComponent } from './expense-category-table/expense-category-table.component';
+import { BudgetCategoryTableComponent } from './budget-category-table/budget-category-table.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -19,11 +24,24 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     LoginComponent,
     BudgetComponent,
     InlineEditComponent,
-    CategoryComponent
+    ExpenseComponent,
+    TestComponent,
+    ExpenseCategoryTableComponent,
+    BudgetCategoryTableComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    RouterModule.forRoot(
+     [
+       { path: 'budget', component: BudgetComponent },
+       { path: 'budget/:year', component: BudgetComponent },
+      
+       { path: 'expense', component: ExpenseComponent },
+       { path: 'expense/:month/:year', component: ExpenseComponent },
+     ] 
+    ),
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,

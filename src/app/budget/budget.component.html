@@ -6,13 +6,13 @@
 <div *ngIf="budget">
         <tabset>
           <tab heading="Category 1">
-                <category [expenses]="budget.category1" (newExpenses)="update(year)"></category>
+                <budget-category-table [expenses]="budget.category1" (updatedExpenses)="update()"></budget-category-table>
           </tab>
           <tab heading="Category 2">
-                <category [expenses]="budget.category2" (newExpenses)="update(year)"></category>
+                <budget-category-table [expenses]="budget.category2" (updatedExpenses)="update()"></budget-category-table>
           </tab>
           <tab heading="Category 3">
-                <category [expenses]="budget.category3" (newExpenses)="update(year)"></category>  
+                <budget-category-table [expenses]="budget.category3" (updatedExpenses)="update()"></budget-category-table>  
           </tab>
         </tabset>
 </div>
