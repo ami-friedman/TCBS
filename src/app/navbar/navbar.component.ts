@@ -13,7 +13,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   budgetYears;
   expenseYears;
   expenseMonths;
-  yearsLinks = [];
+  budgetYearsLinks = [];
+  expenseYearsLinks = [];
   sub1: Subscription;
   sub2: Subscription;
   sub3: Subscription;
@@ -36,19 +37,35 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   toggleBudget() {
-    this.shouldExpand() ? this.expandBudgets(): this.collapseBudgets();
+    this.shouldExpandBudget() ? this.expandBudgets(): this.collapseBudgets();
   }
 
   expandBudgets() {
-    this.yearsLinks = this.budgetYears;
+    this.budgetYearsLinks = this.budgetYears;
   }
 
   collapseBudgets() {
-    this.yearsLinks = [];
+    this.budgetYearsLinks = [];
   }
 
-  shouldExpand() {
-    return this.yearsLinks.length == 0
+  shouldExpandBudget() {
+    return this.budgetYearsLinks.length == 0
+  }
+
+  toggleExpense() {
+    this.shouldExpandExpense() ? this.expandExpense(): this.collapseExpense();
+  }
+
+  expandExpense() {
+    this.expenseYearsLinks = this.expenseYears;
+  }
+
+  collapseExpense() {
+    this.expenseYearsLinks = [];
+  }
+
+  shouldExpandExpense() {
+    return this.expenseYearsLinks.length == 0
   }
 
 }
