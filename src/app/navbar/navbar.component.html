@@ -19,7 +19,7 @@
                   <a class="nav-link">{{ year }}</a>
                   <ul class="nav flex-column">
                       <li *ngFor="let month of expenseMonths">
-                          <a class="nav-link" routerLink="/expense/{{month}}/{{year}}">{{ month }}</a>
+                          <a class="nav-link" routerLink="/expense/{{month}}/{{year}}">{{ months[month] }}</a>
                       </li>
                   </ul>
               </li>

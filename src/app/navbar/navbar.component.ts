@@ -20,6 +20,22 @@ export class NavbarComponent implements OnInit, OnDestroy {
   sub3: Subscription;
   userId = '1234'
 
+  months = [
+    "none",
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ];
+
   constructor(private budgetService: BudgetService, private expenseService: ExpenseService) { }
 
   ngOnInit() {
