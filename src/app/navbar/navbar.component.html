@@ -16,9 +16,12 @@
                 Expense</a>
             </li>
               <li *ngFor="let year of expenseYearsLinks">
-                  <a class="nav-link">{{ year }}</a>
+                  <a class="nav-link" class="pointer">
+                        <span *ngIf="shouldExpandExpense()">+</span>
+                        <span *ngIf="!shouldExpandExpense()">-</span>
+                        {{ year }}</a>
                   <ul class="nav flex-column">
-                      <li *ngFor="let month of expenseMonths">
+                      <li *ngFor="let month of expenseMonths[year]">
                           <a class="nav-link" routerLink="/expense/{{month}}/{{year}}">{{ months[month] }}</a>
                       </li>
                   </ul>

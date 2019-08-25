@@ -12,12 +12,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   budgetYears;
   expenseYears;
-  expenseMonths;
+  expenseMonths = {};
   budgetYearsLinks = [];
   expenseYearsLinks = [];
-  sub1: Subscription;
-  sub2: Subscription;
-  sub3: Subscription;
+  expenseMonthsLinks;
+  budgetYearsSub: Subscription;
+  expenseYearsSub: Subscription;
+  expenseMonthsSub: Subscription[] = [];
   userId = '1234'
 
   months = [
@@ -39,17 +40,23 @@ export class NavbarComponent implements OnInit, OnDestroy {
   constructor(private budgetService: BudgetService, private expenseService: ExpenseService) { }
 
   ngOnInit() {
-    this.sub1 = this.budgetService.getAllYears(this.userId).subscribe(years => this.budgetYears = years);
-    this.sub2 = this.expenseService.getAllYears(this.userId)
-    .subscribe( years => this.expenseYears = years)
-    this.sub3 = this.expenseService.getAllMonths(this.userId, '2019')
-    .subscribe( months => this.expenseMonths = months)
+    this.budgetYearsSub = this.budgetService.getAllYears(this.userId).subscribe(years => this.budgetYears = years);
+    this.expenseYearsSub = this.expenseService.getAllYears(this.userId)
+    .subscribe( years => {
+      this.expenseYears = years;
+      for (let year of this.expenseYears) {
+        this.expenseMonthsSub[year] = this.expenseService.getAllMonths(this.userId, year)
+        .subscribe( months => this.expenseMonths[year] = months);
+      }
+    });
   }
 
   ngOnDestroy() {
-    this.sub1.unsubscribe();
-    this.sub2.unsubscribe();
-    this.sub3.unsubscribe();
+    this.budgetYearsSub.unsubscribe();
+    this.expenseYearsSub.unsubscribe();
+    for (let year in this.expenseYears) {
+      this.expenseMonthsSub[year].unsubscribe();
+    }
   }
 
   toggleBudget() {
