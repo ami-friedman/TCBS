@@ -1,5 +1,5 @@
 
-    <ul class="nav flex-column">
+    <ul class="nav flex-column" *ngIf="userId">
             <li class="nav-item">
               <a class="nav-link" class="pointer" (click)="toggleBudget()">
                 <span *ngIf="shouldExpandBudget()">+</span>
@@ -27,4 +27,6 @@
                   </ul>
               </li>
     </ul>
+    
+    <span *ngIf="!userId"></span>
 

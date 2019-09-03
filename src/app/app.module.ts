@@ -17,6 +17,38 @@ import { TestComponent } from './test/test.component';
 import { ExpenseCategoryTableComponent } from './expense-category-table/expense-category-table.component';
 import { BudgetCategoryTableComponent } from './budget-category-table/budget-category-table.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import {FirebaseUIModule, firebase, firebaseui} from 'firebaseui-angular';
+import {AngularFireAuthModule} from '@angular/fire/auth';
+
+const firebaseUiAuthConfig: firebaseui.auth.Config = {
+  signInFlow: 'popup',
+  signInOptions: [
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    {
+      scopes: [
+        'public_profile',
+        'email',
+        'user_likes',
+        'user_friends'
+      ],
+      customParameters: {
+        'auth_type': 'reauthenticate'
+      },
+      provider: firebase.auth.FacebookAuthProvider.PROVIDER_ID
+    },
+    firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+    firebase.auth.GithubAuthProvider.PROVIDER_ID,
+    {
+      requireDisplayName: false,
+      provider: firebase.auth.EmailAuthProvider.PROVIDER_ID
+    },
+    firebase.auth.PhoneAuthProvider.PROVIDER_ID,
+    firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID
+  ],
+  tosUrl: '<your-tos-link>',
+  privacyPolicyUrl: '<your-privacyPolicyUrl-link>',
+  credentialHelper: firebaseui.auth.CredentialHelper.ACCOUNT_CHOOSER_COM
+};
 
 @NgModule({
   declarations: [
@@ -40,11 +72,15 @@ import { NavbarComponent } from './navbar/navbar.component';
       
        { path: 'expense', component: ExpenseComponent },
        { path: 'expense/:month/:year', component: ExpenseComponent },
+       
+       { path: 'login', component: LoginComponent },
      ] 
     ),
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    AngularFireAuthModule,
+    FirebaseUIModule.forRoot(firebaseUiAuthConfig),
     TabsModule.forRoot(),
     
   ],

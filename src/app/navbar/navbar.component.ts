@@ -19,7 +19,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   budgetYearsSub: Subscription;
   expenseYearsSub: Subscription;
   expenseMonthsSub: Subscription[] = [];
-  userId = '1234'
+  userId;
+  //userId = '1234'
 
   months = [
     "none",
