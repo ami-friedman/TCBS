@@ -1,24 +1,32 @@
 
-    <ul class="nav flex-column">
+    <ul class="nav flex-column" *ngIf="userId">
             <li class="nav-item">
               <a class="nav-link" class="pointer" (click)="toggleBudget()">
-                <span *ngIf="shouldExpand()">+</span>
-                <span *ngIf="!shouldExpand()">-</span>
+                <span *ngIf="shouldExpandBudget()">+</span>
+                <span *ngIf="!shouldExpandBudget()">-</span>
                 Budgets</a>
             </li>
-            <li *ngFor="let year of yearsLinks">
+            <li *ngFor="let year of budgetYearsLinks">
                 <a class="nav-link" routerLink="/budget/{{year}}">{{ year }}</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLink="/expense/5/2019">Expense</a>
+              <a class="nav-link" class="pointer" (click)="toggleExpense()">
+                <span *ngIf="shouldExpandExpense()">+</span>
+                <span *ngIf="!shouldExpandExpense()">-</span>
+                Expense</a>
             </li>
-              <li *ngFor="let year of expenseYears">
-                  <a class="nav-link" routerLink="/budget/{{year}}">{{ year }}</a>
+              <li *ngFor="let year of expenseYearsLinks">
+                  <a class="nav-link" class="pointer">
+                        <span *ngIf="shouldExpandExpense()">+</span>
+                        <span *ngIf="!shouldExpandExpense()">-</span>
+                        {{ year }}</a>
                   <ul class="nav flex-column">
-                      <li *ngFor="let month of expenseMonths">
-                          <a class="nav-link" routerLink="/budget/{{year}}/{{month}}">{{ month }}</a>
+                      <li *ngFor="let month of expenseMonths[year]">
+                          <a class="nav-link" routerLink="/expense/{{month}}/{{year}}">{{ months[month] }}</a>
                       </li>
                   </ul>
               </li>
     </ul>
+    
+    <span *ngIf="!userId"></span>
 
